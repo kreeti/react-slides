@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>React Redux Tutorial</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/black.css">
@@ -32,7 +32,7 @@
         </section>
 				<section>
           <h4>Quick Revision to React and Why React?</h4>
-          <p>
+          <p style="text-align: left;">
             React is a JavaScript library for creating user interfaces by Facebook and Instagram. Many people choose to think of React as the V in MVC.
           </p>
           <ul style="font-size: 25px;">
@@ -157,13 +157,323 @@ React.render(ul, document.getElementsById('app'));
             <li>Implement the render function</li>
             <li>return the UI description</li>
           </ul>
-          </section>
+        </section>
+        <section>
+          <h4>Component Composition</h4>
+          <pre>
+            <code data-trim data-noescape>
+var App = React.createClass({
+  render: function() {
+    return(
+      &lt;div&gt;
+        &lt;Header /&gt;
+        &lt;UserList /&gt;
+        &lt;Footer /&gt;
+      &lt;/div&gt;
+    )
+  }
+});
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h4>Data Flow</h4>
+          Properties passed by the parent, are available to the child in 'this.props'
+          <pre>
+            <code>
+var App = React.createClass({
+  render: function() {
+    return(
+      &lt;div&gt;
+        &lt;Header data="My Header"/&gt;
+        &lt;UserList /&gt;
+        &lt;Footer /&gt;
+      &lt;/div&gt;
+    )
+  }
+});
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h4>Child Component</h4>
+          <pre>
+            <code>
+var App = React.createClass({
+  render: function() {
+    return(
+      &lt;h4&gt;
+        {this.props.data}
+      &lt;/h4&gt;
+    )
+  }
+});
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h4>Data Flow</h4>
+          <p style="text-align: left; font-size: 25px;">From child to parent. We can pass the event handler as a property.</p>
+          <pre>
+            <code>
+var App = React.createClass({
+  popUser: function(key) {
+    console.log("User to be poped"+ key);
+  },
+
+  render: function() {
+    return(
+      &lt;div&gt;
+        &lt;Header data="My Header"/&gt;
+        &lt;UserList popUser={this.popUser}/&gt;
+        &lt;Footer /&gt;
+      &lt;/div&gt;
+    )
+  }
+});
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h4>Child Component</h4>
+          <pre>
+            <code>
+var UserList = React.createClass({
+  showName: function(event) {
+    this.props.popUser(event.target.value);
+  },
+
+  render: function() {
+    return(
+      &lt;input type="text" onChange={this.showName} /&gt;
+    )
+  }
+});
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h4>React Form</h4>
+          <p style="font-size: 28px; text-align: left;">
+            Form components such as input, textarea, and option. Components support a few props that are affected via user interactions:
+          </p>
+          <ul  style="font-size: 25px;">
+            <li>value, supported by input and textarea components.</li>
+            <li>checked, supported by input components of type checkbox or radio.</li>
+            <li>selected, supported by option components.</li>
+          </ul>
+        </section>
+
         <section>
           <h4>Redux</h4>
           <p style="font-size: 25px; text-align: left;">
-            Redux is a predictable state container for JavaScript apps. It helps you write applications that behave consistently, run in different environments. On top of that, it provides a great developer experience.
+            Redux is a predictable state container for JavaScript apps. It helps you write applications that behave consistently, run in different environments. On top of that, it provides a great developer experience.<br/>
+
+            Add   "redux": "^3.5.2" to your package.json.
+
           </p>
         </section>
+        <section>
+          <h4>Immutable JS</h4>
+          <p style="font-size: 25px; text-align: left;">
+            Immutable Javascript means that we're never going to change a value once it's been set on an object. We simply always create new objects and copy their values over.
+          </p>
+          <pre><code data-trim data-noescape>
+var a = { name: "Will", age: 32 }
+a.name = "Fred"
+a
+>  { name: "Fred", age: 32 }
+
+var a = { name: "Will", age: 32 }
+b = a
+b
+> { name: "Will", age: 32 }
+b.age = 35
+b
+> { name: "Will", age: 35 }
+a
+> { name: "Will", age: 35 }
+          </code></pre>
+        </section>
+
+<section>
+          <h4>Immutable JS</h4>
+          <p style="font-size: 25px; text-align: left;">
+            You have to know how to code immutable js objects.
+          </p>
+          <pre><code data-trim data-noescape>
+var a = { name: "Will", age: 32 }
+a
+>  { name: "Will", age: 32 }
+
+var b = Object.assign({}, a, { age: 35 })
+b
+> { name: "Will", age: 35 }
+a
+> { name: "Will", age: 32 }
+
+var a = [0, 1, 2]
+var b = a.filter((val) => val != 2)
+b
+> [0, 1]
+a
+> [0, 1, 2]
+          </code>
+          </pre>
+    </section>
+
+    <section>
+      <p  style="font-size: 25px; text-align: left;">
+        Redux is not based on React. Redux is an elegantly simple way to manage state for your applications. First we have to create the store.
+      </p>
+      <pre>
+        <code data-trim data-noescape>
+import { createStore } from "redux";
+
+const reducer = function() {
+
+}
+
+const store = createStore(reducer, 0);
+
+store.subscribe(() => {
+  console.log("store changed", store.getState())
+})
+
+        </code>
+      </pre>
+    </section>
+    <section>
+<pre>
+        <code data-trim data-noescape>
+import { createStore } from "redux";
+
+const reducer = function() {
+
+}
+
+const store = createStore(reducer, 0);
+
+store.subscribe(() => {
+  console.log("store changed", store.getState())
+})
+
+store.dispatch({ type: "INC", payload: 1 });
+
+        </code>
+      </pre>
+      <pre>
+        <code data-trim data-noescape>
+          > store changed undefined
+        </code>
+      </pre>
+    </section>
+
+    <section>
+      <pre>
+        <code data-trim data-noescape>
+import { createStore } from "redux";
+
+const reducer = function(state, action) {
+  if(action.type == "INC") {
+    return state + 1;
+  }
+  return state;
+}
+const store = createStore(reducer, 0);
+
+store.subscribe(() => {
+  console.log("store changed", store.getState())
+})
+
+store.dispatch({ type: "INC", payload: 1 });
+store.dispatch({ type: "INC", payload: 1 });
+store.dispatch({ type: "INC", payload: 1 });
+store.dispatch({ type: "INC", payload: 2 });
+
+        </code>
+      </pre>
+      <pre>
+        <code data-trim data-noescape>
+> store changed 1
+> store changed 2
+> store changed 3
+> store changed 5
+        </code>
+      </pre>
+    </section>
+
+    <section>
+      <h4>Multiple Reducers</h4>
+      <p style="font-size: 25px; text-align:left;">
+        Once your store is in place, you'll want to set up multiple Redux reducers to act on parts of your data store. Redux reducers are great in that they are only aware of part of your data, and the rest of the data is neither reachable nor able to be mutated by your reducer.
+      </p>
+      <pre style="font-size: 12px">
+        <code data-trim data-noescape>
+import { combineReducers, createStore } from "redux";
+import userReducer from "./userReducer.js"
+import tweetsReducer from "./tweetReducer.js"
+
+const reducers = combineReducers({
+  user: userReducer,
+  tweets: tweetsReducer
+})
+
+const store = createStore(reducers, {
+  user: {
+    name: "Will",
+    age: 32
+  },
+  tweets: []
+});
+
+store.subscribe(() => {
+  console.log("store changed", store.getState())
+})
+
+store.dispatch({ type: "CHANGE_NAME", payload: "Fred" })
+store.dispatch({ type: "CHANGE_AGE", payload: 35 })
+</code></pre>
+    </section>
+
+    <section>
+      <p style="text-align: center">userReducer </p>
+      <pre><code data-trim data-noescape>
+const userReducer = (state={}, action) => {
+  switch(action.type) {
+    case "CHANGE_NAME": {
+      state = {...state, name: action.payload }
+      break;
+    }
+    case "CHANGE_AGE": {
+      state = {...state, age: action.payload }
+      break;
+    }
+  }
+
+  return state;
+}
+
+export default userReducer;
+</code></pre>
+    </section>
+
+    <section>
+      <p style="text-align: center">tweetsReducer </p>
+      <pre><code data-trim data-noescape>
+const tweetsReducer = (state=[], action) => {
+  return state
+}
+
+export default tweetsReducer
+</code></pre>
+    </section>
+
+    <section>
+      <h4>Redux Async Action</h4>
+
+    </section>
+
 			</div>
 		</div>
 

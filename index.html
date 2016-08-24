@@ -274,11 +274,12 @@ var UserList = React.createClass({
           </p>
         </section>
         <section>
-          <h4>Immutable JS</h4>
-          <p style="font-size: 25px; text-align: left;">
-            Immutable Javascript means that we're never going to change a value once it's been set on an object. We simply always create new objects and copy their values over.
-          </p>
-          <pre><code data-trim data-noescape>
+          <section>
+            <h4>Immutable JS</h4>
+            <p style="font-size: 25px; text-align: left;">
+              Immutable Javascript means that we're never going to change a value once it's been set on an object. We simply always create new objects and copy their values over.
+            </p>
+            <pre><code data-trim data-noescape>
 var a = { name: "Will", age: 32 }
 a.name = "Fred"
 a
@@ -293,14 +294,14 @@ b
 > { name: "Will", age: 35 }
 a
 > { name: "Will", age: 35 }
-          </code></pre>
-        </section>
+            </code></pre>
+          </section>
 
-<section>
-          <h4>Immutable JS</h4>
-          <p style="font-size: 25px; text-align: left;">
-            You have to know how to code immutable js objects.
-          </p>
+          <section>
+            <h4>Immutable JS</h4>
+            <p style="font-size: 25px; text-align: left;">
+              You have to know how to code immutable js objects.
+            </p>
           <pre><code data-trim data-noescape>
 var a = { name: "Will", age: 32 }
 a
@@ -318,9 +319,10 @@ b
 > [0, 1]
 a
 > [0, 1, 2]
-          </code>
+            </code>
           </pre>
-    </section>
+          </section>
+        </section>
 
     <section>
       <p  style="font-size: 25px; text-align: left;">
@@ -402,7 +404,7 @@ store.dispatch({ type: "INC", payload: 2 });
         </code>
       </pre>
     </section>
-
+    <section>
     <section>
       <h4>Multiple Reducers</h4>
       <p style="font-size: 25px; text-align:left;">
@@ -468,7 +470,7 @@ const tweetsReducer = (state=[], action) => {
 export default tweetsReducer
 </code></pre>
     </section>
-
+    </section>
     <section>
       <section>
         <h4>Redux Middleware</h4>

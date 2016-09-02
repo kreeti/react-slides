@@ -29,6 +29,7 @@
 			<div class="slides">
 				<section>
           <h2>React With Redux</h2>
+          <p style="font-size:14px; margin-top: 20px: text-align: center;">Presented by Santanu Bhattacharya</p>
         </section>
 				<section>
           <h4>Quick Revision to React and Why React?</h4>
@@ -199,7 +200,7 @@ var App = React.createClass({
           <h4>Child Component</h4>
           <pre>
             <code>
-var App = React.createClass({
+var Header = React.createClass({
   render: function() {
     return(
       &lt;h4&gt;
@@ -506,7 +507,38 @@ export default tweetsReducer
     </section>
 
     <section>
-      <h4>Redux Async Action</h4>
+      <section>
+        <h4>Redux Async Action</h4>
+        <p style="font-size: 25px; text-align:left">
+          When you call an asynchronous API, there are two crucial moments in time: the moment you start the call, and the moment when you receive an answer (or a timeout).
+        </p>
+        <p style="font-size: 25px; text-align: left">
+          We can add   <u><i>axios</i></u>   client to our javascript library. It is a promise based HTTP client for the browser and node.js. Add it to package.json
+        </p>
+        <pre><code data-noescape data-trim>
+"axios": "^0.12.0",
+
+        </code></pre>
+      </section>
+
+      <section>
+        <img data-src="images/async/1.png" />
+      </section>
+      <section>
+        <img data-src="images/async/2.png" />
+      </section>
+      <section>
+        <img data-src="images/async/3.png" />
+      </section>
+      <section>
+        <img data-src="images/async/4.png" />
+      </section>
+      <section>
+        <img data-src="images/async/5.png" />
+      </section>
+      <section>
+        <img data-src="images/async/6.png" />
+      </section>
 
     </section>
 
